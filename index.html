@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="World of Warcraft Mythic Plus damage calculator toolset">
+    <meta name="keywords" content="World of Warcraft, wow, mythic plus, just, heal, us, trance, addon, help, calculator, damage, boss, dungeon, key, scaling, scale, keystone, bfa, Battle for Azeroth, Shadowlands, Blizzard">
+    <meta name="author" content="Trance">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/favicon.jpg">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+        
+    <title>Price</title>
+    <style>
+        .searchForm {
+            width: 1500px;
+        }
+
+        #mainRow {
+            background-color: lightgrey;
+            max-height: 700px;
+            overflow: scroll
+        }
+
+        .cardRow {
+            margin-bottom: 25px;
+        }
+
+        .cardImage {
+            width: 106%
+        }
+
+        .add {
+            margin-left: 5px;
+        }
+
+        .footerImage {
+            width: 5%;
+            margin-left: 10px;
+            
+        }
+
+
+/* [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+} */
+    </style>
+
+</head>
+
+<body class="overflow-scroll">
+
+    <div id="wrap">
+        
+            <nav class="navbar navbar-light bg-light">
+            <form class="form-inline md-form form-sm searchForm">
+                <input id="cardSearch" class="form-control form-control-sm mr-3 w-75" type="text" onkeypress="setTimeout(searchCards, 1)" placeholder="Search for a Card" aria-label="Search for a Card">
+                <i id="search" class="fa fa-search" aria-hidden="true"></i>
+            </form>
+            </nav>
+        
+        <div id="main">
+            <div id="mainRow" class="row overflow-scroll">
+                <div id="img1" class="col-md-3">
+
+                </div>
+                <div id="img2" class="col-md-3">
+                    
+                </div>
+                <div id="img3" class="col-md-3">
+                    
+                </div>
+                <div id="img4" class="col-md-3">
+                    
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="row">
+                <h4 id="total">
+                    $0
+                </h4>
+            </div>
+            <div id="chosen" class="row">
+            </div>
+        </div>
+   
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
