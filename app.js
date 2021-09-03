@@ -40,7 +40,7 @@ function searchCards() {
                 $(`#img${count}`).append(`
                 <div class="row cardRow">
                     <div class="col-md-6">
-                        <img class="cardImage" src="${product.imageUrl}" alt="${product.name}" data-id="${product.productId}">
+                        <a href="https://www.tcgplayer.com/product/${product.productId}" target="_blank"><img class="cardImage" src="${product.imageUrl}" alt="${product.name}" data-id="${product.productId}"></a>
                     </div>
                     <div class="col-md-6">
 
@@ -75,6 +75,10 @@ function searchCards() {
         });
     }
 }
+
+$(document).on("click", ".cardImage", function () {
+
+});
 
 $(document).on("click", ".footerImage", function () { 
     let id = $(this).attr("data-id");
