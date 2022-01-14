@@ -100,6 +100,14 @@ $(document).on("click", ".footerImage", function () {
     $(this).remove();
 });
 
+$(document).on("click", "#clear", function () { 
+    $("#chosen").empty();
+    total = 0;
+        $("#total").html('0');
+
+
+});
+
 $(document).on("click", ".add", function () { 
     let id = $(this).attr("data-id");
     id = parseInt(id);
@@ -301,10 +309,10 @@ groupIDs.forEach(id => {
                     product.set = 19;
                 }
                 product.name = product.name.toLowerCase();
-                if (product.name.includes("dratini")) {
-                    products.push(product);
-                }
-                if (product.name.includes("booster") !== true && product.name.includes("deck") !== true && product.name.includes("pack") !== true && product.name.includes("code") !== true && product.name.includes("tin") !== true)  {
+                // if (product.name.includes("dratini")) {
+                //     products.push(product);
+                // }
+                if (product.name.includes("booster") !== true && product.name.includes("deck") !== true && product.name.includes("pack") !== true && product.name.includes("code") !== true)  {
                 products.push(product);
                 }
             });
