@@ -1,9 +1,12 @@
-let bearer = "Dm7feYgj3nJwtQTTcI8YTJv4_jWPCvmgoLHji1uJX0LFzWJxcsG9Y2KDsLXEPNhWwXLKurO-TmI4cC6Zue8SZ6HHYTqBebaOukoOrICs8hesWBNUQHfTvxv18VjxT_RAth5i6zQeLNec8hh5f_O7mL9UTdeCi94p2L5wILNI10N_KgMy6TgQudfRPA7h5MArOnt2Na4N6Zl4MJZ7WQPdWClgC7FzYPA7fBgobTuCaTfoNQrXJhnIdR05LXPZHDIqsKU6pERr4D016XICJXcxmEHH5thYD2x63X4xYZADjIPuSalK7riLtpoV_0iFUS1hq21m4w";
+let bearer = "nK6EQpi7NDLp-r8EIRbZ-1QbBuu3EobQ-7XZsXdLj4cmDwRgVhgGlhLNYPruI5uPs1rJMzv8EDZs2-5g1PxwiMkBpg9GwCCqP89iTytasablGT-B2cF4nLf8fATMgku88WXmLt8UYty5SHhYgPo8ma16yYChQp3QlouzeukBMF5pvIB-d2ZtAnpWmLqBCLH0AktdJN-qQGkBeqqe0TmlwG_U23cvZTsq-Bs2xqUbKFYFrrAA9oXRCOAgXhKv6vmal1yHX7luh6b3QygnkEjCbdzDqkhaN7V9-pZbFWKy0ewbAR59L7Yl5jKS9-Xr2JS8yIMCIw";
 let search = "";
 // let groupIDs = [1397, 1455, 1373, 630, 1418, 604, 1663, 605, 1375, 1440, 1441, 635, 1374, 1444, 1434, 1396, 1389, 1372, 648];
 let groupIDs = [1397,1455,1373,630,1418,604,1663,605,1375,1440,1441,635,1374,1444,1434,1396,1389,1372,648,2906,2867,2931,2848,2807,2765,2776,2754,2781,2782,2948,2685,2675,2686,2626,2585,2545,2534,2555,2480,2594,2701,1576,1534,1536,1528,1525,1509,1533,1494,1481,1692,1464,1532,1387,1451,1409,1938,1919,2069,1863,1861,1842,1840,1815,1539,1780,2464,2420,2409,2377,2328,2364,2374,2295,2278,1796,1728,1729,1701,1694,2282,2209,2208,2178,2148,2071,2054,1957,1661,1401,1427,1368,1412,1423,1406,1422,2332,1381,1403,2205,1399,1453,1391,1384,2175,2155,1394,1386,1385,1538,1424,1400,1415,1416,1379,1522,1378,1390,1417,1405,1541,1430,1421,1411,1395,1429,1370,1382,1413,1408,1465,1398,1410,1404,1853,2214,2289,1407,609,610,1426,1543,1447,1377,1376,1542,1419,1402,1540,1442,1452,1439,1432,1414,1450,1383,1367,1393,1433,1392,1380,1369,1428,1446]
 let products = [];
 let total = 0;
+let exports = [];
+let exportString = [];
+let baseUrl = "";
 
 $(document).keydown(function (event) {
     var key = (event.keyCode ? event.keyCode : event.which);
@@ -86,6 +89,14 @@ $(document).on("click", ".cardImage", function () {
 
 });
 
+$(document).on("click", "#export", function () {
+    let copyText = baseUrl;
+    exports.forEach(exportCard => {
+        copyText = copyText + "+id=" + exportCard.id + "price=" + exportCard.price;
+    });
+    navigator.clipboard.writeText(copyText);
+});
+
 $(document).on("click", ".footerImage", function () { 
     let id = $(this).attr("data-id");
     id = parseInt(id);
@@ -97,16 +108,59 @@ $(document).on("click", ".footerImage", function () {
     } else {
         $("#total").html(`$${total.toFixed(2)}`);
     }
+    for (i = 0; i < exports.length; i++) {
+        console.log(parseInt(exports[i].id) + "," + id + "," + parseFloat(exports[i].price) + "," + price);
+        if (parseInt(exports[i].id) === id && parseFloat(exports[i].price) === price) {
+            exports.splice(i, 1);
+        }
+    }
     $(this).remove();
 });
 
 $(document).on("click", "#clear", function () { 
     $("#chosen").empty();
+    exports = [];
     total = 0;
         $("#total").html('0');
-
-
 });
+
+window.onload = (event) => {
+    console.log(window.location.href);
+    exportString = window.location.href.split("+");
+    baseUrl = exportString[0];
+    exportString.splice(0, 1);
+    console.log(exportString)
+    exportString.forEach(string => {
+        console.log(string.split("id="))
+        string.split("id=").forEach(firstSplit => {
+            let exportArray = firstSplit.split("price=");
+            console.log(exportArray)
+            let makeExport = {
+                id: 0,
+                price: 0
+            }
+            if (exportArray.length === 2) {
+                exports.push(
+                    {
+                        id: parseInt(exportArray[0]),
+                        price: parseFloat(exportArray[1])
+                    }          
+                )
+            }
+        });
+    });
+    exports.forEach(exportCard => {
+        $("#chosen").append(`
+        <img class="footerImage" src='https://tcgplayer-cdn.tcgplayer.com/product/${exportCard.id}_200w.jpg' data-price="${exportCard.price}" data-id="${exportCard.id}">
+    `);
+    total = total + parseFloat(exportCard.price);
+    });
+    if (total % 1 === 0) {
+        $("#total").html(`$${Math.round(total)}`);
+    } else {
+        $("#total").html(`$${total.toFixed(2)}`);
+    }
+};
 
 $(document).on("click", ".add", function () { 
     let id = $(this).attr("data-id");
@@ -124,8 +178,14 @@ $(document).on("click", ".add", function () {
                 }
                 product.chosenCount++
                 $("#chosen").append(`
-                <img class="footerImage" src="${product.imageUrl}" alt="${product.name}" data-price="${price}" data-id="${product.productId}">
+                <img class="footerImage" src="${product.imageUrl}" data-price="${price}" data-id="${product.productId}">
             `);
+            exports.push(
+                {
+                    id: product.productId,
+                    price: price
+                }
+            );
             console.log(total)
             if (total % 1 === 0) {
                 $("#total").html(`$${Math.round(total)}`);
