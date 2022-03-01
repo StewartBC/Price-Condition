@@ -118,6 +118,11 @@ $(document).on("click", ".footerImage", function () {
 });
 
 $(document).on("click", "#clear", function () { 
+    let copyText = baseUrl;
+    exports.forEach(exportCard => {
+        copyText = copyText + "+id=" + exportCard.id + "price=" + exportCard.price;
+    });
+    navigator.clipboard.writeText(copyText);
     $("#chosen").empty();
     exports = [];
     total = 0;
