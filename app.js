@@ -127,7 +127,7 @@ $(document).on("click", "#clear", function () {
 window.onload = (event) => {
     console.log(window.location.href);
     exportString = window.location.href.split("+");
-    baseUrl = exportString[0];
+    baseUrl = exportString[0] + "?";
     exportString.splice(0, 1);
     console.log(exportString)
     exportString.forEach(string => {
