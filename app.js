@@ -1,7 +1,7 @@
-let bearer = "s7-yuUReEnZ0oxQv_S5bZ_VN1c3y82IptBFeCAOx-6GAnUPTe9kJVmaotKUGaqJ3PAaR410yraazrrqEJeg8pQT11cveP8Q-h6X7rUnZcuRsNS53MTSTl0i4_ANUCzLsOHcciHCd1Zg77edBc7hlzV3ArmfZ4_TNUVUlIS0OG3JnMwc7L6ftVd6zN1RaieW3zP29Tw5c8aAIcySXN1LNQ_OzyXiNXH_uI3XIluJhLjZmM7_DDlfaHV3Cq_164b4o1sYb7Ni9d9laDSH6x3C41wUAtou9O2PvW9xZ9rSd4rvxG6k1ZE4ARsvqWDHAyr3YT3sUEQ";
+let bearer = "eZ9X9Q2eh-0nZC_fVFErtzgz_I719H3lKKTfktyRq1KAjz1EzKc-l0dP_gxAWbRkikcU96rSm6cFNLMGNPsw6m01WukVKJtGzN1-C0IwSYYqqOYILzzXoMl-rIW0gPmTqojpLosOrPNhz_4Q1_vDNRNa-kujecgZtkRnWZ2hSNDhZ3i9WVlZc-Xd-4Uo8uAmb5ufvIArIm81-KU3cwE1WGSa0poDvVNUzK1N0mJbH7-KuuLxjbIMnmHG8rfg62G9K6V7B17KumXDY-iMNRy8HjwVoDrBcXTn6Pk5QVQ0Wi5XbKNTwC3RYhs7B--adK5RCDNX-Q";
 let search = "";
 // let WOTCgroupIDs = [1397, 1455, 1373, 630, 1418, 604, 1663, 605, 1375, 1440, 1441, 635, 1374, 1444, 1434, 1396, 1389, 1372, 648];
-let groupIDs = [3040, 3068, 1397,1455,1373,630,1418,604,1663,605,1375,1440,1441,635,1374,1444,1434,1396,1389,1372,648,2906,2867,2931,2848,2807,2765,2776,2754,2781,2782,2948,2685,2675,2686,2626,2585,2545,2534,2555,2480,2594,2701,1576,1534,1536,1528,1525,1509,1533,1494,1481,1692,1464,1532,1387,1451,1409,1938,1919,2069,1863,1861,1842,1840,1815,1539,1780,2464,2420,2409,2377,2328,2364,2374,2295,2278,1796,1728,1729,1701,1694,2282,2209,2208,2178,2148,2071,2054,1957,1661,1401,1427,1368,1412,1423,1406,1422,2332,1381,1403,2205,1399,1453,1391,1384,2175,2155,1394,1386,1385,1538,1424,1400,1415,1416,1379,1522,1378,1390,1417,1405,1541,1430,1421,1411,1395,1429,1370,1382,1413,1408,1465,1398,1410,1404,1853,2214,2289,1407,609,610,1426,1543,1447,1377,1376,1542,1419,1402,1540,1442,1452,1439,1432,1414,1450,1383,1367,1393,1433,1392,1380,1369,1428,1446,3020,3064,3170,3118,3172,3179,3150,17674,17688,17689,22872,22873,23072,23120]
+let groupIDs = [3040, 3068, 1397,1455,1373,630,1418,604,1663,605,1375,1440,1441,635,1374,1444,1434,1396,1389,1372,648,2906,2867,2931,2848,2807,2765,2776,2754,2781,2782,2948,2685,2675,2686,2626,2585,2545,2534,2555,2480,2594,2701,1576,1534,1536,1528,1525,1509,1533,1494,1481,1692,1464,1532,1387,1451,1409,1938,1919,2069,1863,1861,1842,1840,1815,1539,1780,2464,2420,2409,2377,2328,2364,2374,2295,2278,1796,1728,1729,1701,1694,2282,2209,2208,2178,2148,2071,2054,1957,1661,1401,1427,1368,1412,1423,1406,1422,2332,1381,1403,2205,1399,1453,1391,1384,2175,2155,1394,1386,1385,1538,1424,1400,1415,1416,1379,1522,1378,1390,1417,1405,1541,1430,1421,1411,1395,1429,1370,1382,1413,1408,1465,1398,1410,1404,1853,2214,2289,1407,609,610,1426,1543,1447,1377,1376,1542,1419,1402,1540,1442,1452,1439,1432,1414,1450,1383,1367,1393,1433,1392,1380,1369,1428,1446,3020,3064,3170,3118,3172,3179,3150,17674,17688,17689,22872,22873,23072,23120,23228]
 let products = [];
 let total = 0;
 let exports = [];
@@ -247,7 +247,7 @@ $(document).on("click", ".condition", function () {
                     }
                 }).then(function (res) {
                     console.log(res)
-                    html = html + `Unlimited: ${res.results[0].lowPrice}<button data-id=${id} data-price=${res.results[0].lowPrice} type="button" class="btn btn-secondary add pink-background">Add</button>`;
+                    html = html + `Unlimited: ${res.results[0].marketPrice}<button data-id=${id} data-price=${res.results[0].marketPrice} type="button" class="btn btn-secondary add pink-background">Add</button>`;
                     if (result.results.length > 5) {
                         $.ajax({
                             type: "GET",
@@ -256,10 +256,11 @@ $(document).on("click", ".condition", function () {
                                 'Authorization': `Bearer ${bearer}`,
                             }
                         }).then(function (res) {
+                            console.log (res);
                             if (groupId === 1663 || groupId === 630 || groupId === 635 || groupId === 1373 || groupId === 1389 || groupId === 1396 || groupId === 1434 || groupId === 1440 || groupId === 1441 || groupId === 1444) {
-                                html = html + `<br>1st: ${res.results[0].lowPrice}<button data-id=${id} data-price=${res.results[0].lowPrice} type="button" class="btn btn-secondary add pink-background">Add</button>`;
+                                html = html + `<br>1st: ${res.results[0].marketPrice}<button data-id=${id} data-price=${res.results[0].marketPrice} type="button" class="btn btn-secondary add pink-background">Add</button>`;
                             } else {
-                                html = html + `<br>Reverse: ${res.results[0].lowPrice}<button data-id=${id} data-price=${res.results[0].lowPrice} type="button" class="btn btn-secondary add pink-background">Add</button>`;
+                                html = html + `<br>Reverse: ${res.results[0].marketPrice}<button data-id=${id} data-price=${res.results[0].marketPrice} type="button" class="btn btn-secondary add pink-background">Add</button>`;
 
                             }      
                             $(`#${id}Price`).html(html);
@@ -306,8 +307,8 @@ for (g = 0; g < 200; g++) {
             'Authorization': `Bearer ${bearer}`,
         }
     }).then(function (result) {
-        console.log(result);
         result.results.forEach(set => {
+            console.log(set);
             if (!groupIDs.includes(set.groupId)){
                 groupIDs.push(set.groupId);
             }
